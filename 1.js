@@ -22,7 +22,7 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
 
     this.setID = function (ID) {
-        this.ID = ID
+        this.ID = ID;
     }
 
     this.getID = function () {
@@ -46,15 +46,15 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
 
     this.setPrice = function (price) {
-        this.price = price
+        this.price = price;
     }
 
-    this.getPrice = function (price) {
+    this.getPrice = function () {
         return this.price;
     }
 
     this.setBrand = function (brand) {
-        this.brand = brand
+        this.brand = brand;
     }
 
     this.getBrand = function () {
@@ -62,11 +62,11 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
 
     this.getSizes = function () {
-        return this.sizes;
+        return this.sizes;;
     }
 
     this.setActiveSize = function (activeSize) {
-        this.activeSize = activeSize
+        this.activeSize = activeSize;
     }
 
     this.getActiveSize = function () {
@@ -74,7 +74,7 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
 
     this.setQuanity = function (quantity) {
-        this.quantity = quantity
+        this.quantity = quantity;
     }
 
     this.getQuabity = function () {
@@ -86,7 +86,7 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
             if (this.reviews.find(element => element.ID == ID)) {
                 return this.reviews[i];
             } else {
-                return ("There is no review with this ID")
+                return ("There is no review with this ID");
             }
         }
     }
@@ -97,7 +97,7 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
     this.getImage = function (index) {
         if (index == undefined) {
-            return this.images[0]
+            return this.images[0];
         } else {
             return this.images[index];
         }
@@ -115,9 +115,33 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
         this.reviews.splice(this.reviews.indexOf(this.reviews.find(element => element.ID == ID)), 1)
     }
 
+    this.getAverageRaiting = function () {
+        let sum = 0;
+        let averageRaiting = 0;
+        for (let review of this.reviews) {
+            for (let value of review.raiting.values()) {
+                sum += value;
+            }
+        }
+        return averageRaiting = sum / this.reviews.length
+    }
+
 }
+
+function searchProducts(products = [], search = "") {
+    let targetProducts = [];
+    for (let product of products) {
+        if (product.find(product => product.name.includes(search))) {
+            targetProducts.push(product)
+
+        }
+    }
+    return targetProducts
+}
+
 let apple = new Product();
-apple.addReview(5, "me", 0, "adsds", "price", "0");
-apple.deleteSize('XS')
-apple.deleteReview(5)
-console.log(apple.reviews)
+apple.addReview(5, "me", 0, "adsds", "price", 5);
+apple.addReview(5, "me", 0, "adsds", "price", 3);
+apple.deleteSize('XS');
+//apple.deleteReview(5);
+console.log(apple.getAverageRaiting());
