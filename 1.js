@@ -108,13 +108,16 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
     }
 
     this.deleteSize = function (targetSize) {
-        if (this.sizes.find(element => element == targetSize)) {
-            delete this.sizes.find(element => element == targetSize)
-        }
+        this.sizes.splice(this.sizes.indexOf(this.sizes.find(element => element == targetSize)), 1)
+    }
+
+    this.deleteReview = function (ID) {
+        this.reviews.splice(this.reviews.indexOf(this.reviews.find(element => element.ID == ID)), 1)
     }
 
 }
 let apple = new Product();
 apple.addReview(5, "me", 0, "adsds", "price", "0");
 apple.deleteSize('XS')
-console.log(apple)
+apple.deleteReview(5)
+console.log(apple.reviews)
