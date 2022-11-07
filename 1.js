@@ -131,7 +131,7 @@ function Product(ID, name, description, price, brand, activeSize, quantity, date
 function searchProducts(products = [], search = "") {
     let targetProducts = [];
     for (let product of products) {
-        if (product.find(product => product.name.includes(search))) {
+        if (product.name.includes(search) || product.description.includes(search)) {
             targetProducts.push(product)
 
         }
@@ -140,8 +140,41 @@ function searchProducts(products = [], search = "") {
 }
 
 let apple = new Product();
-apple.addReview(5, "me", 0, "adsds", "price", 5);
-apple.addReview(5, "me", 0, "adsds", "price", 3);
-apple.deleteSize('XS');
-//apple.deleteReview(5);
-console.log(apple.getAverageRaiting());
+apple.setName("apple");
+apple.setDiscription("sdfdf")
+apple.setID(1);
+let potato = new Product();
+potato.setName("potato");
+potato.setID(3)
+let meat = new Product();
+potato.setDiscription("sdfggfh")
+meat.setName("meahhkjt");
+meat.setDiscription("dkfjdkhfgmeatdfdfkgf")
+meat.setID(2)
+let products = [];
+products.push(apple);
+products.push(potato);
+products.push(meat);
+//products.push(meat);
+
+function sortProducts(products, sortRule) {
+    switch (sortRule.toLowerCase()) {
+        case 'price': {
+            products.sort((a, b) => a.getPrice() - b.getPrice());
+
+        }
+        case 'name': {
+            products.sort((a, b) => a.getName().localeCompare(b.getName()));
+
+        }
+        case 'id': {
+            products.sort((a, b) => a.getID() - b.getID()
+
+            );
+
+        }
+
+    }
+}
+
+
