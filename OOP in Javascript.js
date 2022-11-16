@@ -1,10 +1,10 @@
 class AbstractProduct {
-    ID = ID;
-    name = name;
-    description = description
-    price = price;
-    activeSize = activeSize;
-    quantity = quantity;
+    ID;
+    name ;
+    description 
+    price ;
+    activeSize ;
+    quantity ;
     reviews = [];
     images = [];
     constructor(ID, name, description, price, activeSize, quantity) {
@@ -17,7 +17,7 @@ class AbstractProduct {
 
     }
 
-    Review(ID, author, date, comment, raitingKey, raitingValue) {
+     Review= function(ID, author, date, comment, raitingKey, raitingValue) {
         this.ID = ID;
         this.author = author;
         this.date = date;
@@ -67,7 +67,7 @@ class AbstractProduct {
         return this.quantity;
     }
 
-    get reviewByID() {
+    getReviewByID(ID) {
         for (let i = 0; i < this.reviews.length; i++) {
             if (this.reviews.find(element => element.ID == ID)) {
                 return this.reviews[i];
@@ -78,7 +78,8 @@ class AbstractProduct {
     }
 
     addReview(ID, author, date, comment, raitingKey, raitingValue) {
-        this.reviews.push(new Review(ID, author, date, comment, raitingKey, raitingValue))
+        let x = new this.Review(ID, author, date, comment, raitingKey, raitingValue)
+        this.reviews.push(x)
 
     }
     getImageByIndex(index) {
@@ -89,10 +90,9 @@ class AbstractProduct {
         }
     }
 
-
-
     deleteReview(ID) {
         this.reviews.splice(this.reviews.indexOf(this.reviews.find(element => element.ID == ID)), 1)
     }
 
 }
+
